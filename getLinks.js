@@ -7,30 +7,37 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  async function fetchLinks() {
-    try {
-      const loading = document.getElementById('loading');
-      if (loading) loading.classList.remove('d-none');
+async function fetchLinks() {
+  try {
+    const loading = document.getElementById('loading');
+    if (loading) loading.classList.remove('d-none');
 
-      const { data, error } = await supabase
-        .from('dalillinks')
-        .select('*')
-        .order('id', { ascending: false });
+    const { data, error } = await supabase
+      .from('dalillinks')
+      .select('*')
+      .order('id', { ascending: false });
 
-      if (error) {
-        console.error('خطأ في جلب البيانات:', error.message);
-        return [];
-      }
+    console.log('نتيجة fetchLinks():', { data, error }); // 🔥 الطباعة المهمة هنا
 
-      return data || [];
-    } catch (err) {
-      console.error('خطأ عام أثناء جلب الروابط:', err);
+    if (error) {
+      console.error('خطأ في جلب البيانات:', error.message);
       return [];
-    } finally {
-      const loading = document.getElementById('loading');
-      if (loading) loading.classList.add('d-none');
     }
+
+    if (!data || !Array.isArray(data)) {
+      console.error('البيانات المستلمة ليست مصفوفة:', data);
+      return [];
+    }
+
+    return data;
+  } catch (err) {
+    console.error('خطأ عام أثناء جلب الروابط:', err);
+    return [];
+  } finally {
+    const loading = document.getElementById('loading');
+    if (loading) loading.classList.add('d-none');
   }
+}
 
   function displayLinks(links) {
     const container = document.getElementById('links-container');
