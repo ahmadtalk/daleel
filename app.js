@@ -6,7 +6,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // جلب الروابط
 async function fetchLinks() {
   const { data } = await supabase
-    .from('links')
+    .from('dalillinks')
     .select('*')
     .order('created_at', { ascending: false });
   return data;
@@ -14,5 +14,5 @@ async function fetchLinks() {
 
 // إضافة رابط
 async function addLink(newLink) {
-  await supabase.from('links').insert([newLink]);
+  await supabase.from('dalillinks').insert([newLink]);
 }
