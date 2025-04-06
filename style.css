@@ -1,5 +1,6 @@
-/* style.css النهائي مع تخطيط حديث وقائمة جانبية */
+/* style.css النهائي، مرتب وحديث */
 
+/* القواعد الأساسية */
 body {
   margin: 0;
   padding: 0;
@@ -9,28 +10,39 @@ body {
   text-align: right;
 }
 
+/* الهيدر مع صورة خلفية */
 .site-header {
-  background-color: #1E88E5;
-  padding: 15px 20px;
+  background: url('https://i0.wp.com/jamhara.com/wp-content/uploads/2023/08/loggo-1.png') no-repeat center center/cover;
+  height: 250px;
   color: #fff;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container-header {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
 .site-logo {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
 }
 
 .site-title {
-  font-size: 24px;
+  font-size: 28px;
   margin: 0;
+  color: #fff;
 }
 
+/* تخطيط الصفحة الرئيسي */
 .container {
   display: flex;
   flex-direction: row-reverse;
@@ -38,6 +50,7 @@ body {
   padding: 20px;
 }
 
+/* القائمة الجانبية */
 .about-me-sidebar {
   width: 250px;
   background: #ffffff;
@@ -89,11 +102,13 @@ body {
   color: #0d47a1;
 }
 
+/* المنطقة الرئيسية */
 .site-main {
   flex: 1;
   padding: 20px;
 }
 
+/* شبكة الكروت */
 .links-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -169,6 +184,7 @@ body {
   min-height: 40px;
 }
 
+/* الفوتر */
 .site-footer {
   background-color: #1E88E5;
   color: #ffffff;
@@ -177,8 +193,42 @@ body {
   font-size: 14px;
 }
 
+/* عنصر التحميل */
 .loading {
   text-align: center;
   font-size: 18px;
   color: #555;
+}
+
+/* ميديا كويري لتحسين العرض على الهواتف */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .about-me-sidebar {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .site-main {
+    padding: 10px;
+  }
+
+  .links-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-header {
+    height: 180px;
+  }
+
+  .site-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .site-title {
+    font-size: 22px;
+  }
 }
