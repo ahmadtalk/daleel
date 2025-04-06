@@ -1,4 +1,4 @@
-// getLinks.js - نسخة محدثة لتصميم الكروت الجديدة
+// getLinks.js - النسخة النهائية المتوافقة مع تنسيق الكروت الحديث
 
 document.addEventListener('DOMContentLoaded', () => {
   init();
@@ -49,6 +49,9 @@ function displayLinks(links) {
     const header = document.createElement('div');
     header.className = 'link-header';
 
+    const info = document.createElement('div');
+    info.className = 'link-info';
+
     const favicon = document.createElement('img');
     try {
       const url = new URL(link.url);
@@ -65,22 +68,23 @@ function displayLinks(links) {
     title.className = 'link-title';
     title.textContent = link.name || 'اسم غير متوفر';
 
+    info.appendChild(favicon);
+    info.appendChild(title);
+
     const category = document.createElement('div');
     category.className = 'link-category';
     category.textContent = link.category || 'بدون تصنيف';
 
-    header.appendChild(favicon);
-    header.appendChild(title);
+    header.appendChild(info);
     header.appendChild(category);
 
     card.appendChild(header);
 
-    if (link.description) {
-      const description = document.createElement('p');
-      description.className = 'link-description';
-      description.textContent = link.description;
-      card.appendChild(description);
-    }
+    const description = document.createElement('p');
+    description.className = 'link-description';
+    description.textContent = link.description || 'لا يوجد وصف.';
+
+    card.appendChild(description);
 
     container.appendChild(card);
   });
