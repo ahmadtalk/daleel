@@ -2,25 +2,44 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>لوحة التحكم - دليل المواقع</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.38.3/dist/umd/supabase.js"></script>
   <script src="supabaseClient.js"></script>
   <script src="admin.js" defer></script>
-  <link rel="stylesheet" href="style.css"> <!-- لو أردت استخدام نفس التنسيقات -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>لوحة التحكم - إضافة رابط جديد</h1>
+  <div class="container" style="max-width: 600px; margin: 50px auto;">
+    <h1 class="text-center">لوحة التحكم - إضافة رابط جديد</h1>
 
-  <form id="adminForm">
-    <input type="text" id="adminName" placeholder="اسم الموقع" required><br><br>
-    <input type="url" id="adminUrl" placeholder="رابط الموقع" required><br><br>
-    <textarea id="adminDescription" placeholder="وصف الموقع"></textarea><br><br>
-    <input type="text" id="adminCategory" placeholder="التصنيف"><br><br>
-    <button type="submit">إضافة الرابط</button>
-  </form>
+    <form id="adminForm" class="mt-4">
+      <div class="mb-3">
+        <label class="form-label">اسم الموقع</label>
+        <input type="text" id="adminName" class="form-control" required>
+      </div>
 
-  <div id="message"></div>
+      <div class="mb-3">
+        <label class="form-label">رابط الموقع</label>
+        <input type="url" id="adminUrl" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">وصف الموقع</label>
+        <textarea id="adminDescription" class="form-control"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">التصنيف</label>
+        <input type="text" id="adminCategory" class="form-control">
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">إضافة الرابط</button>
+    </form>
+
+    <div id="message" class="mt-4 text-center"></div>
+  </div>
 
 </body>
 </html>
