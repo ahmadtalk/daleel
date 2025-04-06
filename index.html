@@ -171,7 +171,7 @@
         };
 
         // التحقق من localStorage
-        const savedData = localStorage.getItem('smartLinks');
+        const savedData = localStorage.getItem('aldalildb');
         if(savedData) data = JSON.parse(savedData);
 
         // عناصر الصفحة
@@ -229,7 +229,7 @@
 
         // حفظ البيانات
         function saveData() {
-            localStorage.setItem('smartLinks', JSON.stringify(data));
+            localStorage.setItem('aldalildb', JSON.stringify(data));
         }
 
         // تحميل الصفحة
