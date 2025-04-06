@@ -31,6 +31,7 @@ linkForm.addEventListener('submit', async (e) => {
     .from('dalillinks')
     .insert([newLink])
     .select();
+    
 console.log('تمت الإضافة بنجاح:', data);
 
     if (error) {
