@@ -1,92 +1,87 @@
-// getLinks.js النهائي المحدث والمنظّم بالكامل
+// getLinks.js - نسخة محدثة لتصميم الكروت الجديدة
 
 document.addEventListener('DOMContentLoaded', () => {
+  init();
+});
 
-  if (typeof supabase === 'undefined') {
-    console.error('Supabase غير معرف. تحقق من تحميل supabaseClient.js أولاً.');
-    return;
-  }
+async function init() {
+  await fetchLinks();
+}
 
 async function fetchLinks() {
   try {
     const loading = document.getElementById('loading');
-    if (loading) loading.classList.remove('d-none');
+    if (loading) loading.style.display = 'block';
 
     const { data, error } = await supabase
       .from('dalillinks')
       .select('*')
       .order('id', { ascending: false });
 
-    console.log('نتيجة fetchLinks():', { data, error }); // 🔥 الطباعة المهمة هنا
-
     if (error) {
-      console.error('خطأ في جلب البيانات:', error.message);
-      return [];
+      console.error('خطأ أثناء جلب البيانات:', error.message);
+      return;
     }
 
-    if (!data || !Array.isArray(data)) {
-      console.error('البيانات المستلمة ليست مصفوفة:', data);
-      return [];
-    }
+    displayLinks(data);
 
-    return data;
   } catch (err) {
-    console.error('خطأ عام أثناء جلب الروابط:', err);
-    return [];
+    console.error('خطأ عام أثناء جلب البيانات:', err);
   } finally {
     const loading = document.getElementById('loading');
-    if (loading) loading.classList.add('d-none');
+    if (loading) loading.style.display = 'none';
   }
 }
 
-  function displayLinks(links) {
-    const container = document.getElementById('links-container');
+function displayLinks(links) {
+  const container = document.getElementById('links-container');
+  container.innerHTML = '';
 
-    if (!container) {
-      console.error('العنصر links-container غير موجود في الصفحة.');
-      return;
-    }
-
-    // تنظيف الكروت القديمة
-    container.innerHTML = '';
-
-    if (!links.length) {
-      container.innerHTML = '<p class="text-center">لا توجد روابط مضافة بعد.</p>';
-      return;
-    }
-
-    links.forEach(link => {
-      const card = document.createElement('div');
-      card.className = 'link-card col-md-6 mb-3';
-
-      const name = link.name || 'بدون اسم';
-      const url = link.url || '#';
-      const description = link.description || '';
-      const category = link.category || 'غير مصنف';
-      const domain = url !== '#' ? new URL(url).hostname : '';
-
-      card.innerHTML = `
-        <div class="favicon rounded">
-          ${domain ? `<img src="https://www.google.com/s2/favicons?domain=${domain}" alt="Favicon" class="w-100 h-100 rounded">` : ''}
-        </div>
-        <div class="link-content">
-          <a href="${url}" target="_blank" class="link-title d-block">${name}</a>
-          <div class="link-url">${url}</div>
-          <div class="link-description">${description}</div>
-        </div>
-        <div class="category-badge ms-auto">${category}</div>
-      `;
-
-      container.appendChild(card);
-    });
+  if (!links || links.length === 0) {
+    container.innerHTML = '<p class="text-center">لا توجد روابط مضافة بعد.</p>';
+    return;
   }
 
-  async function init() {
-    const links = await fetchLinks();
-    displayLinks(links);
-  }
+  links.forEach(link => {
+    const card = document.createElement('div');
+    card.className = 'link-card';
 
-  window.init = init; // كشف الدالة لاستخدامها خارج الملف أيضًا
-  init();
+    const header = document.createElement('div');
+    header.className = 'link-header';
 
-});
+    const favicon = document.createElement('img');
+    try {
+      const url = new URL(link.url);
+      favicon.src = `https://www.google.com/s2/favicons?domain=${url.hostname}`;
+    } catch (e) {
+      favicon.src = '/favicon.ico';
+    }
+    favicon.alt = 'أيقونة';
+
+    const title = document.createElement('a');
+    title.href = link.url;
+    title.target = '_blank';
+    title.rel = 'noopener';
+    title.className = 'link-title';
+    title.textContent = link.name || 'اسم غير متوفر';
+
+    const category = document.createElement('div');
+    category.className = 'link-category';
+    category.textContent = link.category || 'بدون تصنيف';
+
+    header.appendChild(favicon);
+    header.appendChild(title);
+    header.appendChild(category);
+
+    card.appendChild(header);
+
+    if (link.description) {
+      const description = document.createElement('p');
+      description.className = 'link-description';
+      description.textContent = link.description;
+      card.appendChild(description);
+    }
+
+    container.appendChild(card);
+  });
+}
