@@ -1,6 +1,6 @@
 // تهيئة Supabase
 const supabaseUrl = 'https://wbkvftjmtnihcavfwikg.supabase.co';
-const supabaseKey = 'your-public-api-key';
+const supabaseKey = 'SUPABASE_CLIENT_ANON_KEY';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // جلب الروابط
