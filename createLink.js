@@ -8,7 +8,7 @@ exports.handler = async (event) => {
   const { name, url, description, category } = JSON.parse(event.body);
 
   const { data, error } = await supabase
-    .from('links')
+    .from('dalillinks')
     .insert([{ name, url, description, category }])
     .single();
 
