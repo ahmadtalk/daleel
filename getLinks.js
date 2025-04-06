@@ -6,7 +6,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 exports.handler = async (event) => {
   const { data, error } = await supabase
-    .from('links')
+    .from('dalillinks')
     .select('*')
     .order('created_at', { ascending: false });
 
