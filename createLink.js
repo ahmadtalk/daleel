@@ -1,8 +1,7 @@
-// createLink.js
+document.addEventListener('DOMContentLoaded', () => {
+  const linkForm = document.getElementById('linkForm');
 
-const linkForm = document.getElementById('linkForm');
-
-linkForm.addEventListener('submit', async (e) => {
+  linkForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const newLink = {
@@ -32,4 +31,5 @@ linkForm.addEventListener('submit', async (e) => {
         console.error('خطأ غير متوقع:', err);
         alert('حدث خطأ غير متوقع. يرجى المحاولة لاحقًا.');
     }
+  });
 });
