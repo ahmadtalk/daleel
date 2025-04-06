@@ -1,3 +1,5 @@
+// admin.js - سكربت لوحة التحكم لإضافة الروابط
+
 document.addEventListener('DOMContentLoaded', () => {
 
   if (typeof supabase === 'undefined') {
@@ -18,6 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
       category: document.getElementById('adminCategory').value.trim()
     };
 
+    console.log('سيتم إرسال الرابط التالي إلى Supabase:', newLink);
+
     try {
       const { data, error } = await supabase
         .from('dalillinks')
@@ -25,19 +29,21 @@ document.addEventListener('DOMContentLoaded', () => {
         .select();
 
       if (error) {
+        console.error('خطأ أثناء إضافة الرابط:', error.message);
         message.textContent = 'خطأ أثناء الإضافة: ' + error.message;
         message.style.color = 'red';
         return;
       }
 
+      console.log('تمت الإضافة بنجاح:', data);
       message.textContent = 'تمت إضافة الرابط بنجاح!';
       message.style.color = 'green';
       adminForm.reset();
 
     } catch (err) {
-      message.textContent = 'حدث خطأ غير متوقع.';
+      console.error('خطأ غير متوقع:', err);
+      message.textContent = 'حدث خطأ غير متوقع. حاول مرة أخرى.';
       message.style.color = 'red';
-      console.error(err);
     }
   });
 
