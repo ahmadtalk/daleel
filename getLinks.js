@@ -1,15 +1,18 @@
-const { createClient } = require('@supabase/supabase-js');
+// getLinks.js
 
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabaseUrl = 'https://wbkvftjmtnihcavfwikg.supabase.co' // ضع رابط مشروعك
+const supabaseKey = 'your-anon-key' // ضع مفتاح anon key هنا
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-exports.handler = async (event) => {
-  const { data, error } = await supabase
-    .from('dalillinks')
-    .select('*')
-    .order('created_at', { ascending: false });
+async function fetchLinks() {
+    const { data, error } = await supabase
+        .from('dalillinks')
+        .select('*');
 
-  if (error) return { statusCode: 500, body: error.message };
-  return { statusCode: 200, body: JSON.stringify(data) };
-};
+    if (error) {
+        console.error('خطأ في جلب الروابط:', error.message);
+        return [];
+    }
+
+    return data;
+}
