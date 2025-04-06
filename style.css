@@ -1,4 +1,4 @@
-/* style.css النهائي الجديد لتصميم حديث */
+/* style.css النهائي الجديد والمطور لعرض كروت حديثة وقوية */
 
 body {
   margin: 0;
@@ -50,24 +50,35 @@ body {
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .link-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .link-header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  flex-wrap: wrap;
   margin-bottom: 10px;
 }
 
+.link-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
 .link-header img {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .link-title {
@@ -76,15 +87,19 @@ body {
   margin: 0;
   color: #333;
   text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .link-category {
   font-size: 12px;
   background: #1E88E5;
   color: #fff;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: 12px;
-  margin-right: auto;
+  flex-shrink: 0;
+  margin-top: 5px;
 }
 
 .link-description {
@@ -92,6 +107,7 @@ body {
   color: #555;
   margin-top: 10px;
   line-height: 1.6;
+  min-height: 40px;
 }
 
 .site-footer {
