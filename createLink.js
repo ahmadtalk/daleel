@@ -1,6 +1,6 @@
 // createLink.js
 
-const supabaseUrl = 'https://YOUR_PROJECT_REF.supabase.co'; // ضع هنا رابط مشروعك
+const supabaseUrl = 'https://wbkvftjmtnihcavfwikg.supabase.co'; // ضع هنا رابط مشروعك
 const supabaseKey = 'YOUR_ANON_KEY'; // ضع هنا مفتاح anon key الخاص بك
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
