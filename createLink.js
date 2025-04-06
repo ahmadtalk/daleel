@@ -1,17 +1,13 @@
-const { createClient } = require('@supabase/supabase-js');
+// createLink.js
 
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+async function addLink(linkData) {
+    const { data, error } = await supabase
+        .from('dalillinks')
+        .insert([linkData]);
 
-exports.handler = async (event) => {
-  const { name, url, description, category } = JSON.parse(event.body);
-
-  const { data, error } = await supabase
-    .from('dalillinks')
-    .insert([{ name, url, description, category }])
-    .single();
-
-  if (error) return { statusCode: 500, body: error.message };
-  return { statusCode: 200, body: JSON.stringify(data) };
-};
+    if (error) {
+        console.error('خطأ في إضافة الرابط:', error.message);
+    } else {
+        console.log('تمت إضافة الرابط بنجاح:', data);
+    }
+}
