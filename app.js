@@ -1,5 +1,5 @@
 // تهيئة Supabase
-const supabaseUrl = 'https://your-project-url.supabase.co';
+const supabaseUrl = 'https://wbkvftjmtnihcavfwikg.supabase.co';
 const supabaseKey = 'your-public-api-key';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
