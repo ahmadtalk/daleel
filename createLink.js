@@ -21,8 +21,7 @@ linkForm.addEventListener('submit', async (e) => {
         alert('حدث خطأ أثناء إضافة الرابط. حاول مجددًا.');
     } else {
         console.log('تمت إضافة الرابط:', data);
-        // تحديث العرض مباشرة بعد الإضافة
-        await init();
+        await init(); // إعادة تحميل الروابط بعد الإضافة
         bootstrap.Modal.getInstance(document.getElementById('addLinkModal')).hide();
         linkForm.reset();
     }
