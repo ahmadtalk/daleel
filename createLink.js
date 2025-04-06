@@ -28,9 +28,10 @@ linkForm.addEventListener('submit', async (e) => {
 
   try {
     const { data, error } = await supabase
-      .from('dalillinks')
-      .insert([newLink]) // لاحظ الأقواس المربعة [] مهمة جداً
-      .select();         // <<< إضافة .select() هنا ضرورية مع Supabase v2 للحصول على البيانات المرتجعة
+    .from('dalillinks')
+    .insert([newLink])
+    .select();
+console.log('تمت الإضافة بنجاح:', data);
 
     if (error) {
       console.error('خطأ أثناء إضافة الرابط:', error.message);
